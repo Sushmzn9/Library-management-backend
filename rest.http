@@ -1,10 +1,35 @@
 
 
 @rootApi = http://localhost:8000
-
+@userApi = {{rootApi}}/api/v1/user
 ### server testing
 
 
 GEt {{rootApi}}
 
 
+# ============user Api
+### get user
+GET {{userApi}}
+
+
+
+
+### send
+
+POSt {{userApi}}
+Content-Type: application/json
+
+{
+    "role":"admin",
+    "fName": "Sam",
+    "lName": "Smith",
+    "phone":"0404040404",
+    "address":"NSW",
+    "email": "sushan.maharjan18@gmail.com",
+    "password": "67890"
+    
+}
+
+
+# ===== book Api
