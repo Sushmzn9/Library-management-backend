@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
       msg = "Ther is another user who uses this email in the system";
     }
     res.json({
-      statu: "error",
+      status: "error",
       message: msg,
     });
   }
