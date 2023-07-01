@@ -1,7 +1,7 @@
 import express from "express";
 
-import { insertUser } from "../model/user/UserModel.js";
-import { hashPassword } from "../../utils/bcrypt.js";
+import { getUserByEmail, insertUser } from "../model/user/UserModel.js";
+import { hashPassword, comparePassword } from "../../utils/bcrypt.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -49,4 +49,37 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  try {
+    //get the data
+
+    const { email, password } = req.body;
+    //check if user exit with received email and get user from db
+
+    const user = await getUserByEmail(email);
+
+    if (user?._id) {
+      // use bcrypt to check if the passowrd is matching
+
+      const isMatch = comparePassword(password, user.password);
+      if (isMatch) {
+        user.password = undefined;
+        return res.json({
+          status: "success",
+          message: "Logedin successfully",
+          user,
+        });
+      }
+    }
+    res.json({
+      status: "error",
+      message: "Invalid credentials",
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
 export default router;
