@@ -4,6 +4,7 @@
 @userApi = {{rootApi}}/api/v1/user
 ### server testing
 
+@burrowAPI = {{rootApi}}/api/v1/burrow
 
 GEt {{rootApi}}
 
@@ -33,3 +34,19 @@ Content-Type: application/json
 
 
 # ===== book Api
+
+
+# ====== burrowApi
+###
+POST {{burrowAPI}}
+Content-Type: application/json
+
+{
+    "bookId":"acghauicua678",
+    "BookName": "Sushan Maharjan",
+    "thumbnail": "http://...",
+    "userId": "dfghjkl",
+    "userName": "how to code",
+    "returnDate": "23 jan"
+
+}
