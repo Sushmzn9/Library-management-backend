@@ -5,20 +5,21 @@ import {
   getBook,
   updateBook,
 } from "../model/book/BookModel.js";
+import { adminAuth, auth } from "../Middleware/authMiddleware.js";
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", auth, adminAuth, async (req, res) => {
   try {
-    console.log(req.body);
     const result = await addBook(req.body);
-    result?.id
+
+    result?._id
       ? res.json({
           status: "success",
-          message: "New Book Has been added",
+          message: "New book has been added",
         })
       : res.json({
           status: "error",
-          message: "Error unable to add new Books",
+          message: "Error, unable to add the book, try again later",
         });
   } catch (error) {
     res.json({
@@ -44,20 +45,20 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put("/", auth, adminAuth, async (req, res) => {
   try {
     const { __v, _id, ...rest } = req.body;
-    console.log(req.body);
-    const books = await updateBook(_id, rest);
 
-    books?._id
+    const result = await updateBook(_id, rest);
+
+    result?._id
       ? res.json({
           status: "success",
-          message: "Book has been updated",
+          message: " book has been updated successfully",
         })
       : res.json({
           status: "error",
-          message: "Error unable to update book",
+          message: "Error, unable to update the book, try again later",
         });
   } catch (error) {
     res.json({
@@ -67,20 +68,26 @@ router.put("/", async (req, res) => {
   }
 });
 
-router.delete("/:_id", async (req, res) => {
+router.delete("/:_id", auth, adminAuth, async (req, res) => {
   try {
     const { _id } = req.params;
     const books = await deleteBook(_id);
+
     books?._id
       ? res.json({
           status: "success",
-          message: "Book has been Deleted",
+          message: "The book has been deleted",
         })
       : res.json({
           status: "error",
-          message: "Error unable to delete book",
+          message: "Unable to deleted the book ",
         });
-  } catch (error) {}
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 });
 
 export default router;

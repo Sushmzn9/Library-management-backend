@@ -1,5 +1,9 @@
 import express from "express";
-import { addBurrow, getBurrow } from "../model/burrow/BurrowModel.js";
+import {
+  addBurrow,
+  getBurrow,
+  getBurrowByUserId,
+} from "../model/burrow/BurrowModel.js";
 import { updateBook } from "../model/book/BookModel.js";
 
 const router = express.Router();
@@ -44,10 +48,14 @@ router.post("/", async (req, res) => {
 });
 router.get("/", async (req, res) => {
   try {
-    const burrow = await getBurrow();
+    const { role, _id } = req.userInfo;
+
+    const burrow =
+      role === "admin" ? await getBurrow() : await getBurrowByUserId(_id);
+
     res.json({
       status: "success",
-      message: "Here are the user information",
+      message: "Here are the user burrow information",
       burrow,
     });
   } catch (error) {

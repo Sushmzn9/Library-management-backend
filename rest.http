@@ -6,6 +6,10 @@
 
 @burrowAPI = {{rootApi}}/api/v1/burrow
 
+
+
+@bookApi={{rootApi}}/api/v1/book
+
 GEt {{rootApi}}
 
 
@@ -31,12 +35,21 @@ Content-Type: application/json
     "password": "67890"
     
 }
+\
 
 
-# ===== book Api
 
 
-# ====== burrowApi
+
+# ============ Book api 
+### fetch all book
+GET {{bookApi}}
+Authorization: 64aa149febfeaf4cccb5ac27
+# ======== burrow api
+### fetch
+GET  {{burrowAPI}}
+Authorization: 64aa149febfeaf4cccb5ac27
+
 ###
 POST {{burrowAPI}}
 Content-Type: application/json

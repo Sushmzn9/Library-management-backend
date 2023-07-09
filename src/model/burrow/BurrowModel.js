@@ -10,7 +10,7 @@ export const getBurrow = () => {
 };
 
 //individual id
-export const getBurrowByUserId = () => {
+export const getBurrowByUserId = (userId) => {
   return BurrowSchema.find({ userId });
 };
 
