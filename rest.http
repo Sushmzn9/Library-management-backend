@@ -10,6 +10,10 @@
 
 @bookApi={{rootApi}}/api/v1/book
 
+
+@reviewApi={{rootApi}}/api/v1/review
+
+
 GEt {{rootApi}}
 
 
@@ -63,3 +67,15 @@ Content-Type: application/json
     "returnDate": "23 jan"
 
 }
+###
+PUT {{burrowAPI}}
+Authorization: 64a8e1fc381925c4b42452b0
+
+
+
+# review api 
+
+
+### get reviews
+
+GET {{reviewApi}}

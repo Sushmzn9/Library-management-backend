@@ -51,6 +51,17 @@ router.put("/", auth, adminAuth, async (req, res) => {
 
     const result = await updateBook(_id, rest);
 
+
+const updtbook =await updateBook(
+  {
+    
+  }
+)
+
+
+
+
+
     result?._id
       ? res.json({
           status: "success",
